@@ -141,6 +141,9 @@ numberbuttons.addEventListener('click', (e) =>{
                 attempts-- ;
                 document.getElementById('attemptsblock').innerText = `Attempts : ${attempts}` ;
                 activeelement.style.backgroundColor = "#FFCCCB" ;
+                if(attempts == 0) {
+                    document.getElementById('doneouterblock').style.display = "block" ;
+                }
             }
        }
     }

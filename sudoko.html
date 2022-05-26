@@ -20,12 +20,31 @@
             height : 40px ;
             border-radius: 5px ;
         }
-        /* .box {
-            cursor : context-menu ;
-        } */
+        #doneblock,#successblock {
+            width : 100% ;
+            height : 100% ;
+            position : fixed ;
+            background : rgba(0, 0, 0, 0.8) ;
+            text-align: center;
+        }
+        #doneouterblock,#successouterblock {
+            display: none;
+        }
     </style>
 </head>
-  <body class = "container">
+  <body>
+      <div id="doneouterblock"><div id="doneblock" class = "d-flex flex-column justify-content-center align-items-center">
+          <div style = "width : 200px ; height : 100px ; border-radius: 15px ; background-color: aliceblue ;">
+            <h5 class = "p-2">Attempts done !</h5>
+            <button>retry</button>
+          </div>
+      </div></div>
+      <div id="successouterblock"><div id="successblock" class = "d-flex flex-column justify-content-center align-items-center">
+        <div style = "width : 200px ; height : 100px ; border-radius: 15px ; background-color: aliceblue ;">
+          <h5 class = "p-2 text-success">Completed !</h5>
+          <button>new</button>
+        </div>
+    </div></div>
     <div class = "d-flex flex-column">
         <div class = "mx-auto" style = "width : 360px ;">
             <div class = "d-flex justify-content-between">
