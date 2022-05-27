@@ -20,7 +20,7 @@
             height : 40px ;
             border-radius: 5px ;
         }
-        #doneblock,#successblock {
+        #doneblock,#successblock,#loadingblock {
             width : 100% ;
             height : 100% ;
             position : fixed ;
@@ -45,112 +45,117 @@
           <button>new</button>
         </div>
     </div></div>
+    <div id="loadingouterblock"><div id="loadingblock" class = "d-flex flex-column justify-content-center align-items-center">
+        <div>
+            <h2 class = "p-2 text-light">loading...</h2>
+          </div>
+    </div></div>
     <div class = "d-flex flex-column">
         <div class = "mx-auto" style = "width : 360px ;">
             <div class = "d-flex justify-content-between">
-                <div class = "h5" id="attemptsblock">Attempts : 5</div>
-                <div class = "h5" style = "font-family: monospace;"><span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span></div>
+                <div class = "h5" id="attemptsblock">mistakes : 0/5</div>
+                <div class = "h5" style = "font-family: monospace;"><span id="minutes">00</span>:<span id="seconds">00</span></div>
             </div>
         </div>
         <div class = "mx-auto p-4" id="sudokotable">
             <div class="row">
-                <div class="blocks d-flex align-items-center justify-content-center" id="11" style = "border-width: 3px 0.5px 0.5px 3px;">4</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="11" style = "border-width: 3px 0.5px 0.5px 3px;"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="12" style = "border-width: 3px 0.5px 0.5px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="13" style = "border-width: 3px 2px 0.5px 0.5px"></div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="14" style = "border-width: 3px 0.5px 0.5px 2px">3</div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="15" style = "border-width: 3px 0.5px 0.5px 0.5px">9</div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="16" style = "border-width: 3px 2px 0.5px 0.5px">5</div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="17" style = "border-width: 3px 0.5px 0.5px 2px">2</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="14" style = "border-width: 3px 0.5px 0.5px 2px"></div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="15" style = "border-width: 3px 0.5px 0.5px 0.5px"></div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="16" style = "border-width: 3px 2px 0.5px 0.5px"></div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="17" style = "border-width: 3px 0.5px 0.5px 2px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="18" style = "border-width: 3px 0.5px 0.5px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="19" style = "border-width: 3px 3px 0.5px 0.5px"></div>
             </div>
             <div class="row">
                 <div class="blocks d-flex align-items-center justify-content-center" id="21" style = "border-width: 0.5px 0.5px 0.5px 3px"></div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="22" style = "border-width: 0.5px 0.5px 0.5px 0.5px">5</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="22" style = "border-width: 0.5px 0.5px 0.5px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="23" style = "border-width: 0.5px 2px 0.5px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="24" style = "border-width: 0.5px 0.5px 0.5px 2px"></div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="25" style = "border-width: 0.5px 0.5px 0.5px 0.5px">8</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="25" style = "border-width: 0.5px 0.5px 0.5px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="26" style = "border-width: 0.5px 2px 0.5px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="27" style = "border-width: 0.5px 0.5px 0.5px 2px"></div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="28" style = "border-width: 0.5px 0.5px 0.5px 0.5px">6</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="28" style = "border-width: 0.5px 0.5px 0.5px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="29" style = "border-width: 0.5px 3px 0.5px 0.5px"></div>
             </div>
             <div class="row">
                 <div class="blocks d-flex align-items-center justify-content-center" id="31" style = "border-width: 0.5px 0.5px 2px 3px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="32" style = "border-width: 0.5px 0.5px 2px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="33" style = "border-width: 0.5px 2px 2px 0.5px"></div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="34" style = "border-width: 0.5px 0.5px 2px 2px">4</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="34" style = "border-width: 0.5px 0.5px 2px 2px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="35" style = "border-width: 0.5px 0.5px 2px 0.5px"></div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="36" style = "border-width: 0.5px 2px 2px 0.5px">7</div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="37" style = "border-width: 0.5px 0.5px 2px 2px">3</div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="38" style = "border-width: 0.5px 0.5px 2px 0.5px">5</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="36" style = "border-width: 0.5px 2px 2px 0.5px"></div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="37" style = "border-width: 0.5px 0.5px 2px 2px"></div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="38" style = "border-width: 0.5px 0.5px 2px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="39" style = "border-width: 0.5px 3px 2px 0.5px"></div>
             </div>
             <div class="row">
                 <div class="blocks d-flex align-items-center justify-content-center" id="41" style = "border-width: 2px 0.5px 0.5px 3px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="42" style = "border-width: 2px 0.5px 0.5px 0.5px"></div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="43" style = "border-width: 2px 2px 0.5px 0.5px">3</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="43" style = "border-width: 2px 2px 0.5px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="44" style = "border-width: 2px 0.5px 0.5px 2px"></div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="45" style = "border-width: 2px 0.5px 0.5px 0.5px">4</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="45" style = "border-width: 2px 0.5px 0.5px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="46" style = "border-width: 2px 2px 0.5px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="47" style = "border-width: 2px 0.5px 0.5px 2px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="48" style = "border-width: 2px 0.5px 0.5px 0.5px"></div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="49" style = "border-width: 2px 3px 0.5px 0.5px">5</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="49" style = "border-width: 2px 3px 0.5px 0.5px"></div>
             </div>
             <div class="row">
                 <div class="blocks d-flex align-items-center justify-content-center" id="51" style = "border-width: 0.5px 0.5px 0.5px 3px"></div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="52" style = "border-width: 0.5px 0.5px 0.5px 0.5px">1</div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="53" style = "border-width: 0.5px 2px 0.5px 0.5px">5</div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="54" style = "border-width: 0.5px 0.5px 0.5px 2px">6</div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="55" style = "border-width: 0.5px 0.5px 0.5px 0.5px">2</div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="56" style = "border-width: 0.5px 2px 0.5px 0.5px">8</div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="57" style = "border-width: 0.5px 0.5px 0.5px 2px">9</div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="58"  style = "border-width: 0.5px 0.5px 0.5px 0.5px">3</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="52" style = "border-width: 0.5px 0.5px 0.5px 0.5px"></div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="53" style = "border-width: 0.5px 2px 0.5px 0.5px"></div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="54" style = "border-width: 0.5px 0.5px 0.5px 2px"></div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="55" style = "border-width: 0.5px 0.5px 0.5px 0.5px"></div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="56" style = "border-width: 0.5px 2px 0.5px 0.5px"></div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="57" style = "border-width: 0.5px 0.5px 0.5px 2px"></div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="58"  style = "border-width: 0.5px 0.5px 0.5px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="59" style = "border-width: 0.5px 3px 0.5px 0.5px"></div>
             </div>
             <div class="row">
-                <div class="blocks d-flex align-items-center justify-content-center" id="61" style = "border-width: 0.5px 0.5px 2px 3px">8</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="61" style = "border-width: 0.5px 0.5px 2px 3px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="62" style = "border-width: 0.5px 0.5px 2px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="63" style = "border-width: 0.5px 2px 2px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="64" style = "border-width: 0.5px 0.5px 2px 2px"></div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="65" style = "border-width: 0.5px 0.5px 2px 0.5px">7</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="65" style = "border-width: 0.5px 0.5px 2px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="66" style = "border-width: 0.5px 2px 2px 0.5px"></div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="67" style = "border-width: 0.5px 0.5px 2px 2px">1</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="67" style = "border-width: 0.5px 0.5px 2px 2px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="68" style = "border-width: 0.5px 0.5px 2px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="69" style = "border-width: 0.5px 3px 2px 0.5px"></div>
             </div>
             <div class="row">
                 <div class="blocks d-flex align-items-center justify-content-center" id="71" style = "border-width: 2px 0.5px 0.5px 3px"></div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="72" style = "border-width: 2px 0.5px 0.5px 0.5px">8</div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="73" style = "border-width: 2px 2px 0.5px 0.5px">2</div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="74" style = "border-width: 2px 0.5px 0.5px 2px">9</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="72" style = "border-width: 2px 0.5px 0.5px 0.5px"></div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="73" style = "border-width: 2px 2px 0.5px 0.5px"></div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="74" style = "border-width: 2px 0.5px 0.5px 2px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="75" style = "border-width: 2px 0.5px 0.5px 0.5px"></div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="76" style = "border-width: 2px 2px 0.5px 0.5px">6</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="76" style = "border-width: 2px 2px 0.5px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="77" style = "border-width: 2px 0.5px 0.5px 2px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="78" style = "border-width: 2px 0.5px 0.5px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="79" style = "border-width: 2px 3px 0.5px 0.5px"></div>
             </div>
             <div class="row">
                 <div class="blocks d-flex align-items-center justify-content-center" id="81" style = "border-width: 0.5px 0.5px 0.5px 3px"></div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="82" style = "border-width: 0.5px 0.5px 0.5px 0.5px">4</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="82" style = "border-width: 0.5px 0.5px 0.5px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="83" style = "border-width: 0.5px 2px 0.5px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="84" style = "border-width: 0.5px 0.5px 0.5px 2px"></div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="85" style = "border-width: 0.5px 0.5px 0.5px 0.5px">3</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="85" style = "border-width: 0.5px 0.5px 0.5px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="86" style = "border-width: 0.5px 2px 0.5px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="87" style = "border-width: 0.5px 0.5px 0.5px 2px"></div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="88" style = "border-width: 0.5px 0.5px 0.5px 0.5px">9</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="88" style = "border-width: 0.5px 0.5px 0.5px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="89" style = "border-width: 0.5px 3px 0.5px 0.5px"></div>
             </div>
             <div class="row">
                 <div class="blocks d-flex align-items-center justify-content-center" id="91" style = "border-width: 0.5px 0.5px 3px 3px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="92" style = "border-width: 0.5px 0.5px 3px 0.5px"></div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="93" style = "border-width: 0.5px 2px 3px 0.5px">1</div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="94" style = "border-width: 0.5px 0.5px 3px 2px">7</div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="95" style = "border-width: 0.5px 0.5px 3px 0.5px">5</div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="96" style = "border-width: 0.5px 2px 3px 0.5px">4</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="93" style = "border-width: 0.5px 2px 3px 0.5px"></div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="94" style = "border-width: 0.5px 0.5px 3px 2px"></div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="95" style = "border-width: 0.5px 0.5px 3px 0.5px"></div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="96" style = "border-width: 0.5px 2px 3px 0.5px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="97" style = "border-width: 0.5px 0.5px 3px 2px"></div>
                 <div class="blocks d-flex align-items-center justify-content-center" id="98" style = "border-width: 0.5px 0.5px 3px 0.5px"></div>
-                <div class="blocks d-flex align-items-center justify-content-center" id="99" style = "border-width: 0.5px 3px 3px 0.5px">2</div>
+                <div class="blocks d-flex align-items-center justify-content-center" id="99" style = "border-width: 0.5px 3px 3px 0.5px"></div>
             </div>
         </div>
     </div>

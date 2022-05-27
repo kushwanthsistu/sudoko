@@ -2,17 +2,60 @@ var sudokotable = document.getElementById('sudokotable') ;
 var activeelement ;
 var numberbuttons = document.getElementById('numberbuttons') ;
 var attempts = 5 ;
-var one = 3 ;
-var two = 4 ;
-var three = 5 ;
-var four = 5 ;
-var five = 6 ;
-var six = 3 ;
-var seven = 3 ;
-var eight = 4 ;
-var nine = 4 ;
-var total = 37 ;
+var one = 0 ;
+var two = 0 ;
+var three = 0 ;
+var four = 0 ;
+var five = 0 ;
+var six = 0 ;
+var seven = 0 ;
+var eight = 0 ;
+var nine = 0 ;
+var total = 0 ;
+var seconds = 0 ;
+var minutes = 0 ;
+var minuteblock = document.getElementById('minutes') ;
+var secondsblock = document.getElementById('seconds') ;
 
+let xhr = new XMLHttpRequest() ;
+xhr.open("GET", "https://sudokuback.herokuapp.com/testing", true) ;
+xhr.send() ;
+xhr.onload = () => {
+    setTimeout(() => {
+    let data = xhr.responseText ;
+    data = JSON.parse(data) ;
+    console.log(data) ;
+    for(let i = 0;i<data.locations.length;i++) {
+        document.getElementById(data.locations[i]).innerHTML = data.elements[i] ;
+    }
+    one = data.one ;
+    two = data.two ;
+    three = data.three ;
+    four = data.four ;
+    five = data.five ;
+    six = data.six ;
+    seven = data.seven ;
+    eight = data.eight ;
+    nine = data.nine ;
+    total = data.locations.length ;
+    setInterval(() => {
+        seconds = seconds + 1 ;
+        if(seconds == 60) {
+            seconds = 0 ;
+            minutes++ ;
+        }
+        if(minutes < 10)
+        minuteblock.innerText = `0${minutes}` ;
+        else
+        minuteblock.innerText = minutes ;
+        if(seconds < 10)
+        secondsblock.innerText = `0${seconds}` ;
+        else
+        secondsblock.innerText = seconds ;
+    }, 1000) ;
+    document.getElementById('loadingouterblock').style.display = "none" ;
+},1000 ) ;
+}
 
 sudokotable.addEventListener('click', (e) => {
     if(!e.target.innerHTML) {
@@ -22,20 +65,48 @@ sudokotable.addEventListener('click', (e) => {
         document.getElementById(p.charAt(0)+i).style.backgroundColor = "white" ;
         document.getElementById(i+p.charAt(1)).style.backgroundColor = "white" ;
     }
+    let a = parseInt(p.charAt(0)) ;
+    let b = parseInt(p.charAt(1)) ;
+    a = findnearblock(a) ;
+    b = findnearblock(b) ;
+    for(let i = a;i<a+3;i++) {
+        for(let j = b;j<b+3;j++) {
+            document.getElementById((i*10)+j).style.backgroundColor = "white" ;
+        }
+    }
     activeelement = e.target ;
     var p = activeelement.id ;
     for(var i=1;i<=9;i++) {
-    document.getElementById(p.charAt(0)+i).style.backgroundColor = "skyblue" ;
-    document.getElementById(i+p.charAt(1)).style.backgroundColor = "skyblue" ;
+    document.getElementById(p.charAt(0)+i).style.backgroundColor = "#DBF3FA" ;
+    document.getElementById(i+p.charAt(1)).style.backgroundColor = "#DBF3FA" ;
+    }
+    a = parseInt(p.charAt(0)) ;
+    b = parseInt(p.charAt(1)) ;
+    a = findnearblock(a) ;
+    b = findnearblock(b) ;
+    for(let i = a;i<a+3;i++) {
+        for(let j = b;j<b+3;j++) {
+            document.getElementById((i*10)+j).style.backgroundColor = "#DBF3FA" ;
+        }
     }
     }
     else {
     activeelement = e.target ;
     var p = activeelement.id ;
     for(var i=1;i<=9;i++) {
-    document.getElementById(p.charAt(0)+i).style.backgroundColor = "skyblue" ;
-    document.getElementById(i+p.charAt(1)).style.backgroundColor = "skyblue" ;
-    }}}
+    document.getElementById(p.charAt(0)+i).style.backgroundColor = "#DBF3FA" ;
+    document.getElementById(i+p.charAt(1)).style.backgroundColor = "#DBF3FA" ;
+    }
+    a = parseInt(p.charAt(0)) ;
+    b = parseInt(p.charAt(1)) ;
+    a = findnearblock(a) ;
+    b = findnearblock(b) ;
+    for(let i = a;i<a+3;i++) {
+        for(let j = b;j<b+3;j++) {
+            document.getElementById((i*10)+j).style.backgroundColor = "#DBF3FA" ;
+        }
+    }
+}}
     else {
         if(activeelement) {
         p = activeelement.id ;
@@ -43,6 +114,15 @@ sudokotable.addEventListener('click', (e) => {
             document.getElementById(p.charAt(0)+i).style.backgroundColor = "white" ;
             document.getElementById(i+p.charAt(1)).style.backgroundColor = "white" ;
         }
+        a = parseInt(p.charAt(0)) ;
+        b = parseInt(p.charAt(1)) ;
+        a = findnearblock(a) ;
+        b = findnearblock(b) ;
+        for(let i = a;i<a+3;i++) {
+        for(let j = b;j<b+3;j++) {
+            document.getElementById((i*10)+j).style.backgroundColor = "white" ;
+        }
+    }
         activeelement = null ;
     }}
 })
@@ -139,7 +219,7 @@ numberbuttons.addEventListener('click', (e) =>{
             }
             else {
                 attempts-- ;
-                document.getElementById('attemptsblock').innerText = `Attempts : ${attempts}` ;
+                document.getElementById('attemptsblock').innerText = `mistakes : ${attempts}/5` ;
                 activeelement.style.backgroundColor = "#FFCCCB" ;
                 if(attempts == 0) {
                     document.getElementById('doneouterblock').style.display = "block" ;
