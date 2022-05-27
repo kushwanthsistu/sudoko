@@ -14,6 +14,16 @@
             cursor : context-menu ;
             border : solid black ;
             /* margin : 0.5px ; */
+        }    
+        @media screen and (max-width: 720px) {
+            .blocks {
+                width : 30px ;
+                height : 30px ;
+            }
+            .optionbuttons {
+                width : 25px ;
+                height : 35px ;
+            }
         }
         .optionbuttons {
             width : 30px ;
@@ -51,6 +61,7 @@
           </div>
     </div></div>
     <div class = "d-flex flex-column">
+        <h3 style = "text-align: center;">Sudoku</h3>
         <div class = "mx-auto" style = "width : 360px ;">
             <div class = "d-flex justify-content-between">
                 <div class = "h5" id="attemptsblock">mistakes : 0/5</div>
