@@ -310,7 +310,7 @@ undobutton.addEventListener('click', () => {
     let p = undostack[undostack.length - 1] ;
     p = document.getElementById(p) ;
     activatebutton(p.innerHTML) ;
-    attempts-- ;
+    total-- ;
     p.innerHTML = '' ;
     undostack.pop() ;
     }
@@ -322,7 +322,7 @@ refreshbutton.addEventListener('click', () => {
         let p = undostack[undostack.length - 1] ;
         p = document.getElementById(p) ;
         activatebutton(p.innerHTML) ;
-        attempts-- ;
+        total-- ;
         p.innerHTML = '' ;
         undostack.pop() ;
     }
