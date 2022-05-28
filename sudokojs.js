@@ -1,7 +1,7 @@
 var sudokotable = document.getElementById('sudokotable') ;
 var activeelement ;
 var numberbuttons = document.getElementById('numberbuttons') ;
-var attempts = 5 ;
+var attempts = 0 ;
 var one = 0 ;
 var two = 0 ;
 var three = 0 ;
@@ -16,6 +16,11 @@ var seconds = 0 ;
 var minutes = 0 ;
 var minuteblock = document.getElementById('minutes') ;
 var secondsblock = document.getElementById('seconds') ;
+var highlightarray = [] ;
+var undobutton = document.getElementById('undobutton') ;
+var undostack = [] ;
+var refreshbutton = document.getElementById('refreshbutton') ;
+
 
 let xhr = new XMLHttpRequest() ;
 xhr.open("GET", "https://sudokuback.herokuapp.com/testing", true) ;
@@ -91,6 +96,12 @@ sudokotable.addEventListener('click', (e) => {
     }
     }
     else {
+    if(highlightarray.length) {
+        for(let x = 0;x<highlightarray.length;x++) {
+            document.getElementById(highlightarray[x]).style.backgroundColor = "white" ;
+        }
+        highlightarray =  [] ;
+    }
     activeelement = e.target ;
     var p = activeelement.id ;
     for(var i=1;i<=9;i++) {
@@ -108,6 +119,12 @@ sudokotable.addEventListener('click', (e) => {
     }
 }}
     else {
+        if(highlightarray.length) {
+            for(let x = 0;x<highlightarray.length;x++) {
+                document.getElementById(highlightarray[x]).style.backgroundColor = "white" ;
+            }
+            highlightarray = [] ;
+        }
         if(activeelement) {
         p = activeelement.id ;
         for(var i=1;i<=9;i++) {
@@ -124,7 +141,16 @@ sudokotable.addEventListener('click', (e) => {
         }
     }
         activeelement = null ;
+    }
+    var z = e.target.innerHTML ;
+    for(let x = 1;x<10;x++) {
+    for(let y = 1;y<10;y++) {
+        if(document.getElementById((x*10)+y).innerText == z) {
+        document.getElementById((x*10)+y).style.backgroundColor =  "#E6D1F2" ;
+        highlightarray.push((x*10)+y) ;
+        }
     }}
+    }
 })
 
 function findnearblock(n) {
@@ -191,6 +217,7 @@ numberbuttons.addEventListener('click', (e) =>{
         if(activeelement && !activeelement.innerHTML) {
             let z = 0 ;
             let y = activeelement.id ;
+            undostack.push(y) ;
             for(let i=1;i<10;i++) {
                 if(document.getElementById(y.charAt(0)+i).innerHTML == p.id)
                 z = 1 ;
@@ -211,20 +238,98 @@ numberbuttons.addEventListener('click', (e) =>{
             }
             if(z == 0) {
             activeelement.innerHTML = p.id ;
-            activeelement.style.backgroundColor = "lime" ;
+            activeelement.style.backgroundColor = "#CFF6B6" ;
             deactivebuttons(p.id) ;
             total++ ;
             if(total == 81)
-            alert("done") ; 
+            document.getElementById('successouterblock').style.display = "block" ;
             }
             else {
-                attempts-- ;
+                attempts++ ;
                 document.getElementById('attemptsblock').innerText = `mistakes : ${attempts}/5` ;
                 activeelement.style.backgroundColor = "#FFCCCB" ;
-                if(attempts == 0) {
+                if(attempts == 5) {
                     document.getElementById('doneouterblock').style.display = "block" ;
                 }
             }
        }
     }
 })
+
+function activatebutton(n) {
+    if(n == "1") {
+    one-- ;
+    document.getElementById('1').disabled = false ;
+    }
+    else if(n == "2") {
+    two-- ;
+    document.getElementById('2').disabled = false ;
+    }
+    else if(n == "3") {
+    three-- ;
+    document.getElementById('3').disabled = false ;
+    }
+    else if(n == "4") {
+    four-- ;
+    document.getElementById('4').disabled = false ;
+    }
+    else if(n == "5") {
+    five-- ;
+    document.getElementById('5').disabled = false ;
+    }
+    else if(n == "6") {
+    six-- ;
+    document.getElementById('6').disabled = false ;
+    }
+    else if(n == "7") {
+    seven-- ;
+    document.getElementById('7').disabled = false ;
+    }
+    else if(n == "8") {
+    eight-- ;
+    document.getElementById('8').disabled = false ;
+    }
+    else {
+    nine-- ;
+    document.getElementById('9').disabled = false ;
+    }
+}
+
+function decolorize() {
+    let i = 0 ;
+    let j = 0 ;
+    for(i=1;i<10;i++) {
+        for(j=1;j<10;j++) {
+            document.getElementById((i*10)+j).style.backgroundColor =  "white" ;
+        }
+    }
+}
+
+undobutton.addEventListener('click', () => {
+    if(undostack.length) {
+    let p = undostack[undostack.length - 1] ;
+    p = document.getElementById(p) ;
+    activatebutton(p.innerHTML) ;
+    attempts-- ;
+    p.innerHTML = '' ;
+    undostack.pop() ;
+    }
+    decolorize() ;
+}) ;
+
+refreshbutton.addEventListener('click', () => {
+    while(undostack.length) {
+        let p = undostack[undostack.length - 1] ;
+        p = document.getElementById(p) ;
+        activatebutton(p.innerHTML) ;
+        attempts-- ;
+        p.innerHTML = '' ;
+        undostack.pop() ;
+    }
+    seconds = -1 ;
+    minutes = 0 ;
+    attempts = 0 ;
+    document.getElementById('attemptsblock').innerText = `mistakes : ${attempts}/5` ;
+    decolorize() ;
+})
+
