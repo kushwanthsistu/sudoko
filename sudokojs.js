@@ -20,6 +20,7 @@ var highlightarray = [] ;
 var undobutton = document.getElementById('undobutton') ;
 var undostack = [] ;
 var refreshbutton = document.getElementById('refreshbutton') ;
+var notification = document.getElementById('myAudio') ;
 
 
 let xhr = new XMLHttpRequest() ;
@@ -253,6 +254,9 @@ numberbuttons.addEventListener('click', (e) =>{
                 }
             }
        }
+       else {
+           notification.play() ;
+       }
     }
 })
 
@@ -306,6 +310,7 @@ function decolorize() {
 }
 
 undobutton.addEventListener('click', () => {
+    decolorize() ;
     if(undostack.length) {
     let p = undostack[undostack.length - 1] ;
     p = document.getElementById(p) ;
@@ -314,7 +319,9 @@ undobutton.addEventListener('click', () => {
     p.innerHTML = '' ;
     undostack.pop() ;
     }
-    decolorize() ;
+    else {
+        notification.play() ;
+    }
 }) ;
 
 refreshbutton.addEventListener('click', () => {
@@ -332,4 +339,3 @@ refreshbutton.addEventListener('click', () => {
     document.getElementById('attemptsblock').innerText = `mistakes : ${attempts}/5` ;
     decolorize() ;
 })
-
