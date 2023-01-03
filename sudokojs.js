@@ -24,7 +24,7 @@ var notification = document.getElementById('myAudio') ;
 
 
 let xhr = new XMLHttpRequest() ;
-xhr.open("GET", "https://sudokuback.herokuapp.com/testing", true) ;
+xhr.open("GET", "https://sudoku-back-eenj.onrender.com/testing", true) ;
 xhr.send() ;
 xhr.onload = () => {
     setTimeout(() => {
